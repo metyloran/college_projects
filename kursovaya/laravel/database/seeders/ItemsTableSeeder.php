@@ -1,0 +1,111 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class ItemsTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('items')->insert([
+            [
+                'name' => 'Меч',
+                'description' => 'Обычный одноручный меч',
+                'item_type' => 'weapon',
+                'rarity' => 'common',
+                'level_required' => 1,
+                'strength' => 2,
+                'agility' => 0,
+                'intelligence' => 0,
+                'health_bonus' => 0,
+                'damage_bonus' => 3,
+                'defense_bonus' => 0,
+                'price' => 100,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Кожаный доспех',
+                'description' => 'Лёгкая броня',
+                'item_type' => 'armor',
+                'rarity' => 'common',
+                'level_required' => 1,
+                'strength' => 0,
+                'agility' => 1,
+                'intelligence' => 0,
+                'health_bonus' => 5,
+                'damage_bonus' => 0,
+                'defense_bonus' => 2,
+                'price' => 150,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Зелье лечения',
+                'description' => 'Восстанавливает 10 HP',
+                'item_type' => 'potion',
+                'rarity' => 'common',
+                'level_required' => 1,
+                'strength' => 0,
+                'agility' => 0,
+                'intelligence' => 0,
+                'health_bonus' => 10,
+                'damage_bonus' => 0,
+                'defense_bonus' => 0,
+                'price' => 50,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Лук',
+                'description' => 'Дальнобойное оружие',
+                'item_type' => 'weapon',
+                'rarity' => 'common',
+                'level_required' => 1,
+                'strength' => 1,
+                'agility' => 2,
+                'intelligence' => 0,
+                'health_bonus' => 0,
+                'damage_bonus' => 4,
+                'defense_bonus' => 0,
+                'price' => 120,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Посох мага',
+                'description' => 'Увеличивает интеллект',
+                'item_type' => 'weapon',
+                'rarity' => 'rare',
+                'level_required' => 2,
+                'strength' => 0,
+                'agility' => 0,
+                'intelligence' => 3,
+                'health_bonus' => 0,
+                'damage_bonus' => 2,
+                'defense_bonus' => 0,
+                'price' => 200,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Амулет здоровья',
+                'description' => 'Даёт +15 к здоровью',
+                'item_type' => 'accessory',
+                'rarity' => 'rare',
+                'level_required' => 1,
+                'strength' => 0,
+                'agility' => 0,
+                'intelligence' => 0,
+                'health_bonus' => 15,
+                'damage_bonus' => 0,
+                'defense_bonus' => 1,
+                'price' => 300,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+    }
+}
