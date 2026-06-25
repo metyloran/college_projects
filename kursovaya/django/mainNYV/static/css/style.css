@@ -1,0 +1,264 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fb;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* Логотип */
+img {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Заголовки */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 30px;
+    color: #444;
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+/* Контейнер */
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    max-width: 900px;
+    margin: auto;
+
+}
+
+/* Селекты */
+select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+/* Формы */
+form {
+    margin-top: 10px;
+}
+
+/* Поля ввода */
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Кнопки */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Кнопка выхода */
+form[action*="logout"] button {
+    background-color: #dc3545;
+}
+
+form[action*="logout"] button:hover {
+    background-color: #a71d2a;
+}
+
+/* Карточки шаблонов */
+.templates-list {
+    max-width: 900px;
+    margin: auto;
+}
+
+.template-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+}
+
+/* Кнопки ссылок */
+.template-card a {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* Зеленая кнопка */
+.template-card a:nth-child(2) {
+    background-color: #28a745 !important;
+}
+
+/* Hover для ссылок */
+.template-card a:hover {
+    opacity: 0.85;
+}
+
+/* Разделитель */
+hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    input {
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+.header {
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* Левый блок с логотипом */
+.header-left {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+}
+
+/* Центральный блок с заголовком */
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-title {
+    color: #333;
+    font-size: 28px;
+    margin: 0;
+    text-align: center;
+    padding-left: 600px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+
+
+}
+
+/* Правый блок с кнопкой выхода */
+.header-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.logout-wrapper {
+    margin: 0;
+}
+
+.logout-button {
+    background: linear-gradient(135deg, #f56565, #e53e3e);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.logout-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(229, 62, 62, 0.3);
+}
+
+/* Разделитель */
+.header-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    border: none;
+    height: 2px;
+
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+    
+    .header-left,
+    .header-center,
+    .header-right {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .page-title {
+        font-size: 24px;
+    }
+    
+    .logout-button {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+    
+    .header-divider {
+        position: relative;
+        margin-top: 15px;
+    }
+}

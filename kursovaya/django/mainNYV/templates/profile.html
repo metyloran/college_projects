@@ -1,0 +1,273 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <icon></icon>
+    <title>личный кабинет</title>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <img src="{% static 'logo.png' %}" class="logo" alt="Логотип">
+            <div class="logout-wrapper">
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">Выйти</button>
+                </form>
+        </div>
+
+            <h1 class="page-title">Личный кабинет</h1>
+
+
+        <div class="header-right">
+           
+            </div>
+        </div>
+        
+        <hr class="header-divider">
+    </div>
+    
+        <hr class="header-divider">
+    </div>
+   <div class="container">
+    <h2>Выбор документа</h2>
+   <select id="documentType" onchange="showForm()">
+       <option value="contract">Договор</option>
+       <option value="appendix">Приложение</option>
+       <option value="control">Лист контроля</option>
+   </select>
+       <h2>Личный кабинет</h2>
+       <p>Добро пожаловать, {{ user.username }}!</p>
+       
+       <!-- ФОРМА ДОГОВОРА -->
+       <div id="contractForm" style="display:block">
+           <h3>Договор</h3>
+           <form method="POST">
+               {% csrf_token %}
+               <input type="hidden" name="save_dogovor" value="1">
+               
+               <label>Название организации</label><br>
+               <input type="text" name="org" value="{{ dogovor.org|default:'' }}"><br>
+               
+               <label>Адрес</label><br>
+               <input type="text" name="adress" value="{{ dogovor.adress|default:'' }}"><br>
+               
+               <label>Номер телефона проф. организации</label><br>
+               <input type="text" name="smart" value="{{ dogovor.smart|default:'' }}"><br>
+               
+               <label>Реквезиты</label><br>
+               <input type="text" name="rec" value="{{ dogovor.rec|default:'' }}"><br>
+
+               <label>Руководитель от профильной организации</label><br>
+               <input type="text" name="rycov" value="{{ dogovor.rycov|default:'' }}"><br>
+
+               <label>Должность проф. руководителя</label><br>
+               <input type="text" name="doljnost_profruk" value="{{ pril.doljnost_profruk|default:'' }}"><br>
+               
+               <button type="submit">Сохранить договор</button>
+           </form>
+       </div>
+
+       <!-- ФОРМА ПРИЛОЖЕНИЯ -->
+       <div id="appendixForm" style="display:none">
+           <h3>Приложения 1 и 2</h3>
+           <form method="POST">
+               {% csrf_token %}
+               <input type="hidden" name="save_pril" value="1">
+               
+               <label>Модуль</label><br>
+               <select name="module_id" class="form-control">
+                   <option value="">--------- Выберите модуль ---------</option>
+                   {% for module in modules_list %}
+                       <option value="{{ module.id }}" 
+                           {% if pril.module_id == module.id %}selected{% endif %}>
+                           {{ module.name }}
+                       </option>
+                   {% endfor %}
+               </select><br>
+
+               <label>Начало практики</label><br>
+               <input type="date" name="start" value="{{ pril.start|date:'Y-m-d' }}"><br>
+
+               <label>Конец практики</label><br>
+               <input type="date" name="final" value="{{ pril.final|date:'Y-m-d' }}"><br>
+
+
+
+               <label>Направление</label><br>
+                <select name="direction_id" class="form-control">
+                    <option value="">--------- Выберите направление ---------</option>
+                    {% for direction in directions_list %}
+                        <option value="{{ direction.id }}" 
+                            {% if pril.direction_id == direction.id %}selected{% endif %}>
+                            {{ direction.name_naprav }} - {{ direction.kod }}
+                        </option>
+                    {% endfor %}
+                </select><br>
+
+               <label>Академические часы</label><br>
+               <input type="number" name="akd" value="{{ pril.akd|default:'' }}"><br>
+
+               <label>ФИО студента</label><br>
+               <input type="text" name="fio_stud" value="{{ pril.fio_stud|default:'' }}"><br>
+
+               <label>Дата рождения</label><br>
+               <input type="date" name="date_birth" value="{{ pril.date_birth|date:'Y-m-d' }}"><br>
+
+               <label>ФИО руководителя от техникума</label><br>
+               <input type="text" name="fioruk" value="{{ pril.fioruk|default:'' }}"><br>
+
+               <label>Номер руководителя от техникума</label><br>
+               <input type="number" name="num_ruk" value="{{ pril.num_ruk|default:'' }}"><br>
+
+               <label>ФИО проф. руководителя</label><br>
+               <input type="text" name="fioprofruk" value="{{ pril.fioprofruk|default:'' }}"><br>
+
+               <label>Должность проф. руководителя</label><br>
+               <input type="text" name="doljnost_profruk" value="{{ pril.doljnost_profruk|default:'' }}"><br>
+
+               <label>Номер проф. руководителя</label><br>
+               <input type="number" name="numprofruk" value="{{ pril.numprofruk|default:'' }}"><br>
+
+               <label>Название организации</label><br>
+               <input type="text" name="org" value="{{ pril.org|default:'' }}"><br>
+
+               <label>ФИО ответственного</label><br>
+               <input type="text" name="fiootv" value="{{ pril.fiootv|default:'' }}"><br>
+
+               <label>Должность ответственного</label><br>
+               <input type="text" name="doljotv" value="{{ pril.doljotv|default:'' }}"><br>
+
+               <label>Номер ответственного</label><br>
+               <input type="text" name="numberotv" value="{{ pril.numberotv|default:'' }}"><br>
+
+               <label>Адрес</label><br>
+               <input type="text" name="addres" value="{{ pril.addres|default:'' }}"><br>
+
+               <label>Название помещений</label><br>
+               <input type="text" name="namepomech" value="{{ pril.namepomech|default:'' }}"><br>
+               
+               <button type="submit">Сохранить приложение</button>
+           </form>
+       </div>
+
+       <!-- ФОРМА ЛИСТА КОНТРОЛЯ -->
+       <div id="controlForm" style="display:none">
+           <h3>Лист контроля</h3>
+           <form method="POST">
+               {% csrf_token %}
+               <input type="hidden" name="save_list" value="1">
+               
+               <label>Группа</label><br>
+               <input type="text" name="gru" value="{{ list.gru|default:'' }}"><br>
+
+               <label>Направление</label><br>
+               <select name="direction_id" class="form-control">
+                   <option value="">Выберите направление </option>
+                   {% for direction in directions_list %}
+                       <option value="{{ direction.id }}" 
+                           {% if pril.direction_id == direction.id %}selected{% endif %}>
+                           {{ direction.name_naprav }} - {{ direction.kod }}
+                       </option>
+                   {% endfor %}
+               </select><br>
+
+               <label>День проверки</label><br>
+               <input type="date" name="date" value="{{ list.date|default:'' }}"><br>
+
+               <label>ФИО руководителя от техникума</label><br>
+               <input type="text" name="fio_ruk" value="{{ list.fio_ruk|default:'' }}"><br>
+
+               <label>Период прохождения практики</label><br>
+               <input type="text" name="prohod_pract" value="{{ list.prohod_pract|default:'' }}"><br>
+
+               <label>Организация</label><br>
+               <input type="text" name="org" value="{{ list.org|default:'' }}"><br>
+
+               <label>Руководитель практики от предприятия</label><br>
+               <input type="text" name="ryk_p" value="{{ list.ryk_p|default:'' }}"><br>
+
+               <label>ФИО присутствующего</label><br>
+               <input type="text" name="fioprisut" value="{{ list.fioprisut|default:'' }}"><br>
+
+               <label>ФИО отсутствующего</label><br>
+               <input type="text" name="fio_ots" value="{{ list.fio_ots|default:'' }}"><br>
+
+               <label>Причина отсутствия</label><br>
+               <input type="text" name="prichina" value="{{ list.prichina|default:'' }}"><br>
+               
+               <button type="submit">Сохранить лист контроля</button>
+           </form>
+       </div>
+   </div>
+
+   <hr>
+
+   <h2>Шаблоны документов</h2>
+
+   {% if templates %}
+       <div class="templates-list">
+           {% for template in templates %}
+               <div class="template-card" style="border: 1px solid #ddd; margin: 10px; padding: 15px; border-radius: 5px;">
+                   <h3>{{ template.title }}</h3>
+                   <p>{{ template.description|default:"Нет описания" }}</p>
+                   <p><small>Тип: 
+                       {% if template.doc_type == 'contract' %}Договор
+                       {% elif template.doc_type == 'appendix' %}Приложение
+                       {% elif template.doc_type == 'control' %}Лист контроля
+                       {% else %}{{ template.doc_type }}
+                       {% endif %}
+                   </small></p>
+                   
+                   <div style="margin-top: 10px;">
+                       <a href="{{ template.template_file.url }}" download 
+                          style="background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px;">
+                           📄 Скачать пустой шаблон
+                       </a>
+                       
+                       <a href="{% url 'generate_doc' template.id %}" 
+                          style="background-color: #28a745; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px; margin-left: 10px;">
+                           ✨ Скачать заполненный документ
+                       </a>
+                   </div>
+               </div>
+           {% endfor %}
+       </div>
+   {% else %}
+       <p>Нет доступных шаблонов. Обратитесь к администратору.</p>
+   {% endif %}
+
+   <script>
+       function showForm() {
+           // Скрываем все формы
+           document.getElementById("contractForm").style.display = "none";
+           document.getElementById("appendixForm").style.display = "none";
+           document.getElementById("controlForm").style.display = "none";
+           
+           // Получаем выбранное значение
+           let select = document.getElementById("documentType");
+           let type = select.value;
+           
+           // Показываем нужную форму
+           if(type === "contract"){
+               document.getElementById("contractForm").style.display = "block";
+           }
+           if(type === "appendix"){
+               document.getElementById("appendixForm").style.display = "block";
+           }
+           if(type === "control"){
+               document.getElementById("controlForm").style.display = "block";
+           }
+       }
+       
+       // Вызываем функцию при загрузке страницы, чтобы показать форму по умолчанию
+       document.addEventListener('DOMContentLoaded', function() {
+           showForm();
+       });
+   </script>
+
+</body>
+</html>
